@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 
 import {
   BrowserRouter as Router,
@@ -7,22 +7,24 @@ import {
   Link,
 } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <Fragment>
-          <Navigation />
+const App = () => (
+  <Router>
+    <>
+      <Navigation />
+      <Switch>
+        <Route exact path="/faq" component={Faq} />
+        <Route path="/" component={Dashboard} />
+      </Switch>
 
-          <Switch>
-            <Route exact path="/faq" component={Faq} />
-            <Route path="/" component={Dashboard} />
-          </Switch>
-        </Fragment>
-      </Router>
-    );
-  }
-}
+      <hr />
+
+      <p>
+        Found in{' '}
+        <a href="https://roadtoreact.com/">the Road to React</a>
+      </p>
+    </>
+  </Router>
+);
 
 const Navigation = () => (
   <ul>
