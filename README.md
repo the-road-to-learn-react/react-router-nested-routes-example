@@ -4,6 +4,8 @@
 
 How to create nested routes in React with React Router. [Read more about it.](https://robinwieruch.de/react-router-nested-routes)
 
+[![Edit react-router-nested-routes-example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/the-road-to-learn-react/react-router-nested-routes-example/tree/master/?fontsize=14)
+
 ## Installation
 
 - `git clone git@github.com:the-road-to-learn-react/react-router-nested-routes-example.git`
