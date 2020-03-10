@@ -2,27 +2,19 @@ import React from 'react';
 
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
+  useNavigate,
 } from 'react-router-dom';
 
 const App = () => (
   <Router>
-    <>
-      <Navigation />
-      <Switch>
-        <Route exact path="/faq" component={Faq} />
-        <Route path="/" component={Dashboard} />
-      </Switch>
-
-      <hr />
-
-      <p>
-        Found in{' '}
-        <a href="https://roadtoreact.com/">the Road to React</a>
-      </p>
-    </>
+    <Navigation />
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/wizard/*" element={<Wizard />} />
+    </Routes>
   </Router>
 );
 
@@ -32,23 +24,22 @@ const Navigation = () => (
       <Link to="/">Dashboard</Link>
     </li>
     <li>
-      <Link to="/faq">FAQ</Link>
+      <Link to="/wizard">Wizard</Link>
     </li>
   </ul>
 );
 
-const Faq = () => <h1>FAQ</h1>;
+const Dashboard = () => <h1>Dashboard</h1>;
 
 // Nested Routes
-const Dashboard = () => (
+const Wizard = () => (
   <div>
-    <h1>Dashboard</h1>
+    <h1>Wizard</h1>
 
-    <Switch>
-      <Route exact path="/step-one" component={StepOne} />
-      <Route exact path="/step-two" component={StepTwo} />
-      <Route path="/" component={StepZero} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<StepZero />} />
+      <Route path="/step-one" element={<StepOne />} />
+    </Routes>
   </div>
 );
 
@@ -57,21 +48,25 @@ const StepZero = () => (
   <div>
     <h2>Status: Step Zero</h2>
 
-    <Link to="/step-one">Declarative navigation to Step 1</Link>
+    <Link to="/wizard/step-one">
+      Declarative navigation to Step 1
+    </Link>
   </div>
 );
 
 // Programmatic Navigation
-const StepOne = ({ history }) => (
-  <div>
-    <h2>Status: Step One</h2>
+const StepOne = () => {
+  const navigate = useNavigate();
 
-    <button onClick={() => history.push('/step-two')} type="button">
-      Programmatic navigation to Step 2
-    </button>
-  </div>
-);
+  return (
+    <div>
+      <h2>Status: Step One</h2>
 
-const StepTwo = () => <h2>Status: Step Two</h2>;
+      <button onClick={() => navigate('/wizard')} type="button">
+        Programmatic navigation to Step 0
+      </button>
+    </div>
+  );
+};
 
 export default App;
